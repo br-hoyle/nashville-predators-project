@@ -1,0 +1,26 @@
+[project]
+name = "nashville-predators-project"
+version = "0.1.0"
+description = "A Streamlit app for the Nashville Predators data analyst assessment."
+authors = [
+    {name="Benjamin Hoyle", email="benjaminrhoyle@gmail.com>"}
+]
+readme = "README.md"
+requires-python = ">=3.12.0, < 3.13.0"
+
+[tool.poetry]
+package-mode = false
+
+[tool.poetry.dependencies]
+python = ">=3.12.0, < 3.13.0"
+pandas = "^2.2.2"
+plotly = "^5.24.1"
+streamlit = "^1.51.0"
+openpyxl = "^3.1.5"
+
+[tool.poetry.group.dev.dependencies]
+black = "^25.1.0"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
