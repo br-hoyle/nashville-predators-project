@@ -1,0 +1,15 @@
+[theme]
+primaryColor = "#bb5a38"            # Team accent pop on dark UI
+backgroundColor = "#0f0f0f"         # Matte-rink black
+secondaryBackgroundColor = "#1a1a1a" 
+textColor = "#f3f3f3"               # High-contrast, broadcast-friendly
+linkColor = "#bb5a38"               # Accent color for key actions
+borderColor = "#2f2f2f"             # Subtle steel-grey divider
+showWidgetBorder = true
+baseRadius = "0.35rem"              # Slight angularity (NHL vibe)
+codeBackgroundColor = "#1b1b1b"
+showSidebarBorder = true
+
+[theme.sidebar]
+backgroundColor = "#141414"         # Slightly lighter matte-black panel
+secondaryBackgroundColor = "#1d1d1d"
