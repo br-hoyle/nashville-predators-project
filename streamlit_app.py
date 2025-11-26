@@ -94,7 +94,7 @@ def main():
     ## ------------------------------------------------------------------ ##
     ## CREATE TABS
     ## ------------------------------------------------------------------ ##
-    summary_tab, predict_tab = st.tabs(["Summary", "ML Model"])
+    summary_tab, predict_tab = st.tabs(["Summary", "Recommendation Engine"])
 
     with summary_tab:
 
