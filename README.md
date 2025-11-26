@@ -1,8 +1,8 @@
 # Nashville Predators Assessment
 Benjamin Hoyle | November 2025 | Data Analyst Position Interview
 
-Web Application Link: https://brhoyle-nashville-predators-project.streamlit.app/ 
-GitHub Repo: https://github.com/br-hoyle/nashville-predators-project 
+Web Application Link: https://brhoyle-nashville-predators-project.streamlit.app/  
+GitHub Repo: https://github.com/br-hoyle/nashville-predators-project  
 
 ## Assignment
 Our assistant coach is responsible for determining which players should take faceoffs in different situations. To support his decisions, he’s asked for deeper insights from our team’s faceoff data. For this first stage in evaluating your skills as a data analyst, we’d like you to show how you would approach this project using the sample data provided.
