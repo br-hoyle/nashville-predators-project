@@ -319,6 +319,11 @@ def prediction_section(faceoff_df: pd.DataFrame):
     playerid_series = input_df["playerid_team"]
     input_df = input_df[X.columns]
 
+    with st.expander("Input Dataframes", expanded=False):
+        input_df_to_display = input_df.copy()
+        input_df_to_display["playerid"] = playerid_series
+        st.dataframe(input_df_to_display)
+
     # Predict Players & Make DataFrame
     predictions = model.predict_proba(input_df)
     predictions_df = pd.DataFrame(predictions)
