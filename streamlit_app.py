@@ -5,11 +5,15 @@ import plotly.express as px
 # Import modules
 from utilities.global_setup import setup_app, page_footer
 from utilities.extract import get_team_logo, load_team_codes
-from utilities.transform import faceoff_cleaning, player_cleaning
-from utilities.plots import plot_rink_chart
+from utilities.transform import (
+    filter_faceoff_df,
+    faceoff_cleaning,
+    player_cleaning,
+)
 
 from sections.team import team_section
 from sections.player import player_section
+from sections.prediction import prediction_section
 
 
 def main():
@@ -197,98 +201,20 @@ def main():
 
                 submitted = st.form_submit_button("Apply Filters")
 
-        ## ------------------------------------------------------------------ ##
-        ## APPLY FILTERS TO DATAFRAME
-        ## ------------------------------------------------------------------ ##
-
-        def filter_faceoff_df(df: pd.DataFrame) -> pd.DataFrame:
-            """Apply filters from session state to faceoff dataframe."""
-            filtered_df = df.copy()
-
-            # Apply Home Filter
-            if st.session_state.home_filter == "Home":
-                filtered_df = filtered_df[filtered_df["home"] == 1]
-            elif st.session_state.home_filter == "Away":
-                filtered_df = filtered_df[filtered_df["home"] == 0]
-
-            # Apply opponent filter
-            if st.session_state.opponent_filter != []:
-                filtered_df = filtered_df[
-                    filtered_df["opponent"].isin(st.session_state.opponent_filter)
-                ]
-
-            # Apply season filter
-            if st.session_state.season_filter != []:
-                filtered_df = filtered_df[
-                    filtered_df["season"].isin(st.session_state.season_filter)
-                ]
-            # Apply period filter
-            if st.session_state.period_filter != []:
-                filtered_df = filtered_df[
-                    filtered_df["period"].isin(st.session_state.period_filter)
-                ]
-            # Apply zone filter
-            if st.session_state.zone_filter != []:
-                filtered_df = filtered_df[
-                    filtered_df["zone"].isin(st.session_state.zone_filter)
-                ]
-
-            # Apply strength filter
-            if st.session_state.strength_filter == "Power Play":
-                filtered_df = filtered_df[filtered_df["power_play"] == 1]
-            elif st.session_state.strength_filter == "Even Strength":
-                filtered_df = filtered_df[
-                    (filtered_df["power_play"] == 0)
-                    & (filtered_df["short_handed"] == 0)
-                ]
-            elif st.session_state.strength_filter == "Short Handed":
-                filtered_df = filtered_df[filtered_df["short_handed"] == 1]
-
-            # Apply net situation filter
-            if st.session_state.net_filter == "Empty Net":
-                filtered_df = filtered_df[filtered_df["empty_net"] == 1]
-            elif st.session_state.net_filter == "Extra Attacker":
-                filtered_df = filtered_df[filtered_df["extra_attacker"] == 1]
-            elif st.session_state.net_filter == "Standard":
-                filtered_df = filtered_df[
-                    (filtered_df["empty_net"] == 0)
-                    & (filtered_df["extra_attacker"] == 0)
-                ]
-
-            # Apply score state filter
-            if st.session_state.scorestate_filter != "All":
-                filtered_df = filtered_df[
-                    filtered_df["score_state"].lower()
-                    == st.session_state.scorestate_filter.lower()
-                ]
-
-            return filtered_df
-
         faceoff_df = filter_faceoff_df(faceoff_df)
 
         ## ------------------------------------------------------------------ ##
-        ## TEAM METRICS & CHART
+        ## TEAM & PLAYER METRICS AND CHARTs
         ## ------------------------------------------------------------------ ##
 
         team_section(faceoff_df=faceoff_df)
-
-        ## ------------------------------------------------------------------ ##
-        ## PLAYER ANALYSIS
-        ## ------------------------------------------------------------------ ##
-
         player_section(faceoff_df=faceoff_df, player_df=player_df)
 
     ## ---------------------------------------------------------------------------------------------------- ##
     ## ---------------------------------------------------------------------------------------------------- ##
-    ## ---------------------------------------------------------------------------------------------------- ##
 
     with predict_tab:
-
-        ## -------------------------------------------------------------- ##
-        ## FILTERS
-        ## -------------------------------------------------------------- ##
-
-        st.write("hello!")
+        prediction_section(faceoff_df=faceoff_df)
 
 
 if __name__ == "__main__":
